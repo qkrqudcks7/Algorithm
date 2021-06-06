@@ -22,9 +22,11 @@ def dfs(i, now):
         elif sub > 0:
             sub -= 1
             dfs(i + 1, now - a[i])
+            sub += 1
         elif mul > 0:
             mul -= 1
             dfs(i + 1, now * a[i])
+            mul += 1
         elif div > 0:
             div -= 1
             dfs(i + 1, int(now / a[i]))
