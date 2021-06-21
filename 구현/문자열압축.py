@@ -21,7 +21,7 @@ def solution(s):
                 count = 1
         if count == 1:
             count = ""
-        result += str[count] + tempStr
+        result += str(count) + tempStr
         length.append(len(result))
         result = ""
 

@@ -1,11 +1,20 @@
-from itertools import combinations
+def solution(s):
+    length=[]
+    result=""
 
-n,m=map(int,input().split())
-weight = list(map(int,input().split()))
+    if len(s) == 1:
+        return 1
 
-result=0
+    for i in range(1,len(s)//2+1):
+        count=1
+        tempStr=s[0:i]
 
-for a,b in combinations(weight,2):
-    if a!=b:
-        result+=1
-print(result)
+        for j in range(i,len(s),i):
+            if s[j:j+i] == tempStr:
+                count+=1
+            else:
+                if count==1:
+                    count=""
+                result += str(count)+tempStr
+                tempStr = s[j:j+i]
+                count=1
