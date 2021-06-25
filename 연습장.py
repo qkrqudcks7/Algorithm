@@ -1,13 +1,12 @@
-n,c= map(int,input().split())
-a=[]
+a=[19,20,10,1,5]
+b=[11,13,85,65,9]
 
-for i in range(n):
-    a.append(int(input()))
+aa=25
+bb=20
+print(aa | bb)
 
-a.sort()
+for a1,b1 in zip(a,b):
+    print(bin(a1 | b1)[2:])
 
-start=1
-end=a[-1]-a[0]
-result=0
 
-while(start<=end):
+
