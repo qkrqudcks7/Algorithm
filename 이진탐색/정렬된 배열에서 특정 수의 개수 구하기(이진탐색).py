@@ -3,6 +3,7 @@ def binary_search_start(array, target, start, end):
     while start <= end:
         mid = (start + end) // 2
         if array[mid] == target:
+            # 해당 값을 가지는 원소중에서 가장 왼쪽에 있는 경우만 인덱스 반환
             if mid - 1 < 0 or array[mid - 1] != target:
                 return mid
             else:

@@ -31,8 +31,11 @@ def dijkstra(start):
 
 dijkstra(start)
 
+# 최단 거리가 가장 먼 노드 번호
 max_node = 0
+# 도달할 수 있는 노드 중에서 최단 거리가 가장 먼 노드와의 최단거리
 max_distance = 0
+# 최단 거리가 가장 먼 노드와의 최단거리와 동일한 최단 거리를 가지는 노드들의 리스트
 result = []
 
 for i in range(1, n + 1):
