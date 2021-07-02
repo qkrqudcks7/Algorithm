@@ -2,13 +2,12 @@ import copy
 from collections import deque
 
 n, m = map(int, input().split())
-a = [list(map(int, input())) for i in range(n)]
+a = [list(map(int, input().split())) for i in range(n)]
 q = deque()
 
 dx = [1, -1, 0, 0]
 dy = [0, 0, 1, -1]
 ans = 0
-
 
 def bfs():
     global ans
