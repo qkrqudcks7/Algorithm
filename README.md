@@ -30,6 +30,14 @@
 - 데이터가 100만개 이하일 때 사용하면 적절함
 ### :bulb: 시뮬레이션 : 알고리즘을 한 단계씩 차례대로
 
+### tip !!!!!!!!!
+
+문자열 조합시
+
+result=[('aa',5,'.txt'),('bb','aa','.png')]
+join을 사용하여 원 문자로 조합 가능
+return [''.join(i) for i in result]
+
 
 ## :pushpin: DFS/BFS
 
