@@ -1,1 +1,1 @@
-aaaa
+print([x for x in range(5)] + [-1])
