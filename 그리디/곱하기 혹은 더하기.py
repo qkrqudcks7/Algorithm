@@ -1,11 +1,9 @@
-data = input()
-result = int(data[0])
-
-for i in range(1, len(data)):
-    num = int(data[i])
-
-    if result <= 1 or num <= 1:
-        result += num
+s = input()
+count = int(s[0])
+for i in range(1, len(s)):
+    if count == 0:
+        count += int(s[i])
     else:
-        result *= num
-print(result)
+        count *= int(s[i])
+
+print(count)
