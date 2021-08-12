@@ -1,6 +1,5 @@
 import heapq
 
-
 def solution(food_times, k):
     if sum(food_times) <= k:
         return -1
@@ -8,10 +7,12 @@ def solution(food_times, k):
     q = []
     for i in range(len(food_times)):
         # (음식시간,음식번호)
+        # heapq에 넣으면 자동으로 오름차순으로 정렬돼서 들어감
         heapq.heappush(q, (food_times[i], i + 1))
 
-    sum_value = 0  # 먹기 위해 사용한 시간
-    previous = 0  # 직전에 다 먹은 음식 시간
+    # 가장 작은 시간이 걸리는 음식을 다 먹을 때 까지 다른 음식들은 아직 남아있게 된다.
+    sum_value = 0  # 가장 짧은 음식 시간 * 남은 음식의 수
+    previous = 0  # 이전에 가장 짧았던 음식 시간
 
     length = len(food_times)  # 남은 음식의 개수
 
