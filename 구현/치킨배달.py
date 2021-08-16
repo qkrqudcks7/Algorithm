@@ -14,7 +14,7 @@ for i in range(n):
             chicken.append((i, j))
 
 candidates = list(combinations(chicken, m))
-
+print(candidates)
 
 def get_sum(i):
     result = 0
@@ -29,6 +29,7 @@ def get_sum(i):
 
 result = 1e9
 for i in candidates:
+    print(i)
     result = min(result, get_sum(i))
 
 print(result)

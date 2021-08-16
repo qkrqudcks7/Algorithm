@@ -7,7 +7,7 @@ def solution(food_times, k):
     q = []
     for i in range(len(food_times)):
         # (음식시간,음식번호)
-        # heapq에 넣으면 자동으로 오름차순으로 정렬돼서 들어감
+        # 자동으로 [0]번째가 젤 작은 수가 오도록 정렬 됨
         heapq.heappush(q, (food_times[i], i + 1))
 
     # 가장 작은 시간이 걸리는 음식을 다 먹을 때 까지 다른 음식들은 아직 남아있게 된다.
@@ -19,6 +19,7 @@ def solution(food_times, k):
     # 먹기위해 사용한 시간 +(현재의 음식시간-이전 음식시간)*남은 음식의 개수
     while sum_value + ((q[0][0] - previous) * length) <= k:
         now = heapq.heappop(q)[0]
+        # (현재의 음식시간-이전 음식시간)*남은 음식의 개수
         sum_value += (now - previous) * length
         length -= 1  # 다 먹은 음식은 제외
         previous = now  # 이전 음식 시간 재설정

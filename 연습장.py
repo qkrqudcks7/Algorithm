@@ -1,9 +1,51 @@
-import heapq
+import copy
+from collections import deque
 
-food=[3,1,2]
-q=[]
-for i in range(len(food)):
-   heapq.heappush(q,(food[i],i+1))
+n, m = map(int, input().split())
+board = [[list(map(int, input().split()))] for i in range(n)]
 
-print(q)
-print(heapq.heappop(q)[0])
+q = deque()
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+ans = 0
+
+
+def bfs():
+    global ans
+    w = copy.deepcopy(board)
+
+    for i in range(n):
+        for j in range(m):
+            if w[i][j] == 2:
+                q.append((i, j))
+
+    while q:
+        x, y = q.popleft()
+
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < n and 0 <= ny < m:
+                if w[nx][ny] == 0:
+                    w[nx][ny] = 2
+                    q.append((nx, ny))
+
+    count = 0
+    for i in w:
+        count += i.count(0)
+    ans = max(ans, count)
+
+
+def wall(x):
+    if x == 3:
+        bfs()
+        return
+    for i in range(n):
+        for j in range(m):
+            if board[i][j] == 0:
+                board[i][j] = 1
+                wall(x + 1)
+                board[i][j] = 0
+
+wall(0)
+print(ans)
