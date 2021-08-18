@@ -23,7 +23,7 @@ def check_proper(p):
             # 나중에 빼줘야 됨
             count -= 1
 
-        return True
+    return True
 
 
 def solution(p):
