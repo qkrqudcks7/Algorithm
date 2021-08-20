@@ -9,8 +9,8 @@ distance = [1e9] * (n + 1)
 
 for i in range(m):
     a, b = map(int, input().split())
-    graph[a].append((b, 1))
-    graph[b].append((a, 1))
+    graph[a].append((1, b))
+    graph[b].append((1, a))
 
 
 def dijkstra(start):
@@ -22,11 +22,12 @@ def dijkstra(start):
         dist, now = heapq.heappop(q)
         if distance[now] < dist:
             continue
-        for i in graph[now]:
-            cost = dist + i[1]
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+        # v=비용 d=노드, 현재 노드와 연결된 다른 인접한 노드들을 확인
+        for v, d in graph[now]:
+            cost = dist + v
+            if cost < distance[d]:
+                distance[d] = cost
+                heapq.heappush(q, (cost, d))
 
 
 dijkstra(start)
@@ -43,6 +44,7 @@ for i in range(1, n + 1):
         max_node = i
         max_distance = distance[i]
         result = [max_node]
+
     elif max_distance == distance[i]:
         result.append(i)
 
