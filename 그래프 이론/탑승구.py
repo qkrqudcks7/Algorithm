@@ -14,19 +14,19 @@ def union_parent(parent, a, b):
         parent[a] = b
 
 
-g = int(input())
-p = int(input())
+G = int(input())
+P = int(input())
 
-parent = [0] * (g + 1)
-
-for i in range(1, g + 1):
-    parent[i] = i
+parent = [i for i in range(G + 1)]
 
 result = 0
-for i in range(p):
+for i in range(P):
+    # 현재 비행기의 탑승구의 루트 확인
     data = find_parent(parent, int(input()))
+    # 현재 루트가 0이면, 종료
     if data == 0:
         break
+    # 그렇지 않다면 바로 왼쪽의 집합과 합치기
     union_parent(parent, data, data - 1)
     result += 1
 
