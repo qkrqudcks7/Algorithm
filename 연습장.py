@@ -1,3 +1,3 @@
-temp = ["1", "2", "3", "4", "5"]
-
-print("*".join(temp))
+a = (set(range(1, 10)))
+b = set(range(0, 5))
+print(a-b)
