@@ -1,1 +1,0 @@
-print(divmod(0,16))
