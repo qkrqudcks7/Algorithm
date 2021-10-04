@@ -18,4 +18,6 @@ def bfs():
             if 0 <= i <= MAX and not board[i]:
                 board[i] = board[x] + 1
                 q.append(i)
+
+
 bfs()
