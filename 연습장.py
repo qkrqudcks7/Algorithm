@@ -1,2 +1,2 @@
-a = "awdA??AAW?DAD?"
-print(a.replace("?","."))
+a= [1,2,3]
+print(len(a))
