@@ -35,7 +35,7 @@ for i in range(n):
             count.append(bfs(board, i, j))
 
 count.sort()
-
+print(count)
 print(len(count))
 for i in range(len(count)):
     print(count[i])
