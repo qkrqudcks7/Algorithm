@@ -16,10 +16,12 @@ def bfs():
 
         for i in (x - 1, x + 1, 2 * x):
             if 0 <= i < MAX and not board[i]:
-                if i == 2*x and x != 0:
+                if i == 2 * x and x != 0:
                     board[i] = board[x]
                     q.append(i)
                 else:
                     board[i] = board[x] + 1
                     q.append(i)
+
+
 print(bfs())
