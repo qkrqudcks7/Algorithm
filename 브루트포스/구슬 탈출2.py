@@ -1,74 +1,64 @@
+from sys import stdin
 from collections import deque
 
-n, m = map(int, input().split())
-
-dx = [1, 0, -1, 0]
-dy = [0, 1, 0, -1]
-
-board = []
+n, m = map(int, stdin.readline().split())
+graph = [list(stdin.readline()) for _ in range(n)]
 for i in range(n):
-    board.append(list(input()))
     for j in range(m):
-        if board[i][j] == "R":
-            rx, ry = i, j
-        elif board[i][j] == "B":
-            bx, by = i, j
+        if graph[i][j] == 'R':
+            graph[i][j] = '.'
+            red = [i, j]
+        elif graph[i][j] == 'B':
+            graph[i][j] = '.'
+            blue = [i, j]
 
 
+def movemove(x, y, dx, dy):
+    move = 0
+    while graph[x+dx][y+dy] != '#':
+        # 구멍으로 탈출할 경우 0,0 return
+        if graph[x+dx][y+dy] == 'O':
+            return 0, 0, 0
+        x += dx
+        y += dy
+        move += 1
+    return x, y, move
 
-def bfs(rx, ry, bx, by):
-    q = deque()
-    q.append((rx, ry, bx, by))
-    visited = [(rx, ry, bx, by)]
-    count = 0
 
-    while q:
-        for _ in range(len(q)):
-            rx, ry, bx, by = q.popleft()
-            if count > 10:
-                print(-1)
+def bfs():
+    # 빨간 구슬과 파란 구슬 동시에 방문체크 해야함
+    visit = {}
+    queue = deque([red + blue])
+    visit[red[0], red[1], blue[0], blue[1]] = 0
+    while queue:
+        rx, ry, bx, by = queue.popleft()
+        for dx, dy in (-1, 0), (1, 0), (0, -1), (0, 1):      # 상하좌우
+            nrx, nry, rmove = movemove(rx, ry, dx, dy)
+            nbx, nby, bmove = movemove(bx, by, dx, dy)
+            # 두 공 모두 또는 파란 공만 탈출한 경우
+            if not nbx and not nby:
+                continue
+            # 빨간 공만 탈출한 경우
+            elif not nrx and not nry:
+                print(visit[rx, ry, bx, by] + 1)
                 return
-            if board[rx][ry] == 'O':
-                print(count)
-                return
-
-            for i in range(4):
-                nrx, nry = rx, ry
-                while True:
-                    nrx += dx[i]
-                    nry += dy[i]
-                    if board[nrx][nry] == '#':
-                        nrx -= dx[i]
-                        nry -= dy[i]
-                        break
-                    if board[nrx][nry] == "O":
-                        break
-
-                nbx, nby = bx, by
-                while True:
-                    nbx += dx[i]
-                    nby += dy[i]
-
-                    if board[nbx][nby] == "#":
-                        nbx -= dx[i]
-                        nby -= dy[i]
-                        break
-                    if board[nbx][nby] == "O":
-                        break
-                if board[nbx][nby] == "O":
-                    continue
-                if nrx == nbx and nry == nby:
-                    if abs(nrx - rx) + abs(nry - ry) > abs(nbx - bx) + abs(nby - by):
-                        nrx -= dx[i]
-                        nry -= dy[i]
-                    else:
-                        nbx -= dx[i]
-                        nby -= dy[i]
-                if (nrx, nry, nbx, nby) not in visited:
-                    q.append((nrx, nry, nbx, nby))
-                    visited.append((nrx, nry, nbx, nby))
-        count += 1
-    print(-1)
+            # 두 공이 같은 위치에 있는 경우
+            elif nrx == nbx and nry == nby:
+                # 이동거리가 적은 구슬을 한 칸 뒤로
+                if rmove > bmove:
+                    nrx -= dx
+                    nry -= dy
+                else:
+                    nbx -= dx
+                    nby -= dy
+            # visit하지 않았으면 queue에 append
+            if (nrx, nry, nbx, nby) not in visit:
+                visit[nrx, nry, nbx, nby] = visit[rx, ry, bx, by] + 1
+                queue.append([nrx, nry, nbx, nby])
+        # answer에 값을 넣었거나 queue가 비었거나 움직인 횟수가 10이상이면 그만
+        if not queue or visit[rx, ry, bx, by] >= 10:
+            print(-1)
+            return
 
 
-bfs(rx, ry, bx, by)
+bfs()
