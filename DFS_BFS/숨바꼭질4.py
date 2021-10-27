@@ -27,5 +27,5 @@ def bfs():
             if 0 <= i < MAX and not visited[i]:
                 visited[i] = visited[v] + 1
                 q.append(i)
-                path[i] = v
+                path[i] = v  # 전의 노드를 추가
 bfs()
