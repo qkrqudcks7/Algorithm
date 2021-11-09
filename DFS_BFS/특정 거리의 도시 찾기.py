@@ -26,12 +26,13 @@ def dijkstra(start):
                 visit[nd] = cost + c
                 heapq.heappush(q, [cost + c, nd])
 
-dijkstra(x)
-flag=False
 
-for i in range(1,n+1):
+dijkstra(x)
+flag = False
+
+for i in range(1, n + 1):
     if visit[i] == k:
-        flag=True
+        flag = True
         print(i)
 if not flag:
     print(-1)
